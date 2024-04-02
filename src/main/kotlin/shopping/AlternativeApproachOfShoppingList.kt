@@ -112,7 +112,7 @@ fun updateProductOfShoppingList(shoppingListAlternative: MutableList<Product>) {
                 val productPrice = readLine()?.toDoubleOrNull() ?: 0.0
                 println("Enter Product Quantity: ")
                 val productQuantity = readLine()?.toIntOrNull() ?: 0
-                if (productPrice>0&&productQuantity>0){
+                if (isValidProduct(productName,productPrice,productQuantity)){
                     product.priceOfProduct = productPrice
                     product.quantityOfProduct = productQuantity
                     println("${product.nameOfProduct} is updated Successfully")
