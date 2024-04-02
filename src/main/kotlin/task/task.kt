@@ -57,8 +57,8 @@ fun addTask(taskList: MutableList<Task>) {
 fun removeTask(taskList: MutableList<Task>) {
     println("Enter Task Name or ID: ")
     val removeTask = readLine() ?: ""
-
     val taskIndex = removeTask.toIntOrNull()
+
     val taskToRemove = if (taskIndex != null) {
         val index = taskIndex - 1
         if (index in taskList.indices) taskList[index] else null
