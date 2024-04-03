@@ -10,16 +10,10 @@ fun main() {
     while (true) {
         showMenuOptions()
         when (readLine()?.toIntOrNull() ?: 0) {
-            1 -> {
-                if (taskList.isNotEmpty()) showTaskList(taskList) else println("Empty Task List")
-            }
+            1 -> isListEmpty(taskList) { showTaskList(taskList) }
             2 -> addTask(taskList)
-            3 -> {
-                if (taskList.isNotEmpty()) removeTask(taskList) else println("Empty Task List")
-            }
-            4 -> {
-                if (taskList.isNotEmpty()) updateTaskStatus(taskList) else println("Empty Task List")
-            }
+            3 -> isListEmpty(taskList) { removeTask(taskList) }
+            4 -> isListEmpty(taskList) { updateTaskStatus(taskList) }
             5 -> return
         }
     }
@@ -34,9 +28,13 @@ fun showMenuOptions() {
     println("5.Exit")
 }
 
+fun isListEmpty(taskList: MutableList<Task>, action: () -> Unit) {
+    if (taskList.isNotEmpty()) action() else println("Empty Task List")
+}
+
 fun showTaskList(taskList: MutableList<Task>) {
     println("------------Task List-------------")
-    println("ID  TASK       Status")
+    println("ID  TASK         Status")
     taskList.forEachIndexed { index, task ->
         val status = if (task.isCompleted) "COMPLETED" else "PENDING"
         println("${index + 1}. ${task.taskName?.uppercase()}        $status")
