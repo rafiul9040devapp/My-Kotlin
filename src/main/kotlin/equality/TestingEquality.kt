@@ -7,16 +7,11 @@ package equality
 
 /* A class is a blueprint for an object;
 it shares common properties and behaviour in form of members and member functions. */
-class PersonalDetails(
-    val name: String,
-    val age: Int
-)
+class PersonalDetails(val name: String, val age: Int)
 
 /* Data class is a simple class which is used to hold data/state and contains standard functionality. */
-data class Book(
-    val title: String,
-    val author: String
-)
+data class Book(val title: String, val author: String)
+
 
 fun main() {
     //EQUALITY FOR DATA TYPES
@@ -41,7 +36,7 @@ fun main() {
 
     //It Will print TRUE as they have same memory allocation
     println(rakib3 == rakib2)//reference is checked
-    println(rakib3 === rakib2)//reference is checked
+    println( rakib2 === rakib3)//reference is checked
 
 
     //EQUALITY FOR DATA CLASS
