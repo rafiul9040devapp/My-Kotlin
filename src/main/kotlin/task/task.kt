@@ -75,7 +75,7 @@ fun updateTaskStatus(taskList: MutableList<Task>) {
     println("Enter TASK name:")
     val nameOfTask = readLine() ?: " "
 
-    if (nameOfTask.isNotEmpty() || nameOfTask.isNotBlank()) {
+    if (nameOfTask.isNotEmpty() && nameOfTask.isNotBlank()) {
         val updatedTask = taskList.find { task ->
             task.taskName.equals(nameOfTask, false)
         }
