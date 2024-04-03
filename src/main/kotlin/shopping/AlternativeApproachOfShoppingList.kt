@@ -11,11 +11,11 @@ fun main() {
     while (true) {
         showMenuOptions()
         when (readLine()?.toIntOrNull() ?: 0) {
-            1 -> isShoppingListEmpty(shoppingListAlternative) { showShoppingList(shoppingListAlternative) }
+            1 -> executeIfShoppingListIsNotEmpty(shoppingListAlternative) { showShoppingList(shoppingListAlternative) }
             2 -> addProductToShoppingList(shoppingListAlternative)
-            3 -> isShoppingListEmpty(shoppingListAlternative) { removeProductFromShoppingList(shoppingListAlternative) }
-            4 -> isShoppingListEmpty(shoppingListAlternative) { updateProductOfShoppingList(shoppingListAlternative) }
-            5 -> isShoppingListEmpty(shoppingListAlternative) { checkOutTheBill(shoppingListAlternative) }
+            3 -> executeIfShoppingListIsNotEmpty(shoppingListAlternative) { removeProductFromShoppingList(shoppingListAlternative) }
+            4 -> executeIfShoppingListIsNotEmpty(shoppingListAlternative) { updateProductOfShoppingList(shoppingListAlternative) }
+            5 -> executeIfShoppingListIsNotEmpty(shoppingListAlternative) { checkOutTheBill(shoppingListAlternative) }
             6 -> return
             else -> println("Invalid Option")
         }
@@ -32,7 +32,7 @@ fun showMenuOptions() {
     println("6.Exit")
 }
 
-fun isShoppingListEmpty(shoppingListAlternative: MutableList<Product>, action: () -> Unit) = if (shoppingListAlternative.isNotEmpty()) action() else println("Empty List")
+fun executeIfShoppingListIsNotEmpty(shoppingListAlternative: MutableList<Product>, action: () -> Unit) = if (shoppingListAlternative.isNotEmpty()) action() else println("Empty List")
 
 fun showShoppingList(shoppingListAlternative: MutableList<Product>) {
     println("------------Shopping List-------------")
@@ -91,7 +91,7 @@ fun removeProductFromShoppingList(shoppingListAlternative: MutableList<Product>)
 fun updateProductOfShoppingList(shoppingListAlternative: MutableList<Product>) {
     println("Enter The Product Name:")
     val productName = readLine() ?: ""
-    if (productName.isNotBlank()) {
+    if (productName.isNotBlank() || productName.isNotEmpty()) {
         val product = shoppingListAlternative.find { product -> product.nameOfProduct.equals(productName, false) }
         if (product != null) {
             println("Enter Product Price: ")

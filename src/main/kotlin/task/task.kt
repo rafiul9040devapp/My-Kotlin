@@ -10,10 +10,10 @@ fun main() {
     while (true) {
         showMenuOptions()
         when (readLine()?.toIntOrNull() ?: 0) {
-            1 -> isListEmpty(taskList) { showTaskList(taskList) }
+            1 -> executeIfTaskListNotEmpty(taskList) { showTaskList(taskList) }
             2 -> addTask(taskList)
-            3 -> isListEmpty(taskList) { removeTask(taskList) }
-            4 -> isListEmpty(taskList) { updateTaskStatus(taskList) }
+            3 -> executeIfTaskListNotEmpty(taskList) { removeTask(taskList) }
+            4 -> executeIfTaskListNotEmpty(taskList) { updateTaskStatus(taskList) }
             5 -> return
         }
     }
@@ -28,9 +28,7 @@ fun showMenuOptions() {
     println("5.Exit")
 }
 
-fun isListEmpty(taskList: MutableList<Task>, action: () -> Unit) {
-    if (taskList.isNotEmpty()) action() else println("Empty Task List")
-}
+fun executeIfTaskListNotEmpty(taskList: MutableList<Task>, action: () -> Unit) =  if (taskList.isNotEmpty()) action() else println("Empty Task List")
 
 fun showTaskList(taskList: MutableList<Task>) {
     println("------------Task List-------------")
@@ -99,6 +97,10 @@ fun updateTaskStatus(taskList: MutableList<Task>) {
         }
     }
 }
+
+//fun executeIfTaskListNotEmpty(taskList: MutableList<Task>, action: () -> Unit) {
+//    taskList.takeIf { it.isNotEmpty() }?.let { action() } ?: println("Empty Task List")
+//}
 
 //fun removeTaskOriginal(taskList: MutableList<Task>) {
 //    println("Enter Task Name OR ID: ")
