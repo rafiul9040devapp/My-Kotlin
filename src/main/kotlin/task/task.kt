@@ -15,6 +15,7 @@ fun main() {
             3 -> executeIfTaskListNotEmpty(taskList) { removeTask(taskList) }
             4 -> executeIfTaskListNotEmpty(taskList) { updateTaskStatus(taskList) }
             5 -> return
+            else -> println("Invalid Option")
         }
     }
 }
